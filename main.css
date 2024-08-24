@@ -1,0 +1,48 @@
+body {
+    font-family: monospace;
+    font-size: 20px;    
+    letter-spacing: -1px;
+
+    background-color: #ffdead;
+}
+div {
+    position: absolute;
+
+    margin: 0%;
+    padding: 0%;
+    padding-right: 1px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#player {
+    background-color: #ADFFC8;
+    color: #674F80;
+    
+    top: 0;
+    left: 0;
+}
+#txt {
+    background-color: black;
+    color: white;
+    font-size: 15px;
+
+    margin: 20px;
+    padding: 20px;
+    width: 250px;
+    height: 100px;
+
+    z-index: 90;
+    border-color: white;
+    border-width: 3px;
+    border-style: dashed;
+}
+.object {
+    background-color: #4F805F;
+    color: #ffdead;
+}
+.npc {
+    background-color: #674F80;
+    color: #ffdead;
+    z-index: -10;
+}
