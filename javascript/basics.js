@@ -2,7 +2,10 @@ let pos = [0, 0]
 let objsPos = []
 let npcPos = [] 
 let npcID = [] //1-1 with npcPos
-let dialogStage = 0;
+let dialogStage = 1; //dialogStage = 0 is the id of the NPC
+let InternalId = 0; //NPC ID used for dialog, it's its index in the array. I made it so npcID and InternalID are not the same for flexebility, less errors!
+//DEBUG
+let dbgnmbr = 0;
 
 //
 //
@@ -54,9 +57,9 @@ function controls(plr, eve, margins, spd) {
     
     //OTHER CONTROLS
         case 'KeyQ': //interact NPC
-            for (let i = 0; i < npcPos.length; i++) {
+            for (let i = 0; i < npcPos.length; i++) { //yes it checks all NPCs, it's fast enough though
                 if (pos.toString() === npcPos[i].toString()) {
-                    npcDialog(npcID[i], dialogStage);
+                    npcDialog(npcID[i], dialogStage); //InternalID is not given as it can be used globaly, and it needs to be used globaly for KeyP to work
                     dialogStage++;
                 }
             }
@@ -64,8 +67,10 @@ function controls(plr, eve, margins, spd) {
         case 'KeyP': //open menu (items, quests, stats) & close txtbox if open | ONLY SECOND WORKS
             if (appBool == true) {
                 glbtxt.remove();
-                appBool = false;
-                dialogStage = 0;
+                appBool = false; //Varible from dialog.js
+
+                dialogStage = 1;
+                InternalId = 0; //Variable from npc.js
             } else {
                 //MENU
             }
@@ -99,7 +104,7 @@ function applypos(newPos, obj) {
 //
 //OBJECTS
 function setObj(obj) {
-    console.time();
+    let A = performance.now(); //ignore this
     for (let i = 0; i < obj.length; i++) {
         const cObj = obj[i];
         let Opos = cObj.innerHTML.split('#'); //In order [X cordinate, Y cordinate, NPC ID (if any)]
@@ -129,10 +134,19 @@ function setObj(obj) {
     for (let i = 0; i < npcPos.length; i++) { //IT IS NEEDED EXACTLY LIKE THAT FOR DIALOG, DO NOT MESS WITH THIS
         npcID[i] = npcPos[i].pop();
     }
-
-    console.timeEnd();
-    console.log('@ OBJECTS');
+    let B = performance.now();
+    dbgnmbr = (B - A);
+    console.log(dbgnmbr + ' @ OBJECTS');
 }
+
+
+
+
+
+
+
+
+//
 //
 //The grid(tm) is an imaginary set of cordinates where all objects, NPCs and the player operate in.
 //Each "cell" in the grid is a 10x10 box of pixels, and it can also be considered as a step.
