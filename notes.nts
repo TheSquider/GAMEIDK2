@@ -1,8 +1,15 @@
 #Do basic Menu (done)
-#Do NPC move
+#Do NPC move (done?)
+#FIX NPC MOVE
+    -Get rid of repitition (done-no player merger)
+    -Generalise
+    -Stop moving while talking (impossible right now)
+    -Infinite move
 #Do items
 #Do quests
 #Do paths (done-for now)
 #Do NPC dialog choice (THE CAN FUCKING RUN CODE LESSS GOOOO)
+#Do NPC dilog seporate from npc.js
+#FIX CLASSES
 
 Rooted class names (basic.js, ln: 131 & 147-152)

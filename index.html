@@ -9,7 +9,7 @@
     <script src="./javascript/dialog.js"></script>
     <title>HUB</title>
 </head>
-<body onkeypress="controls(document.getElementById('player'), event, [0, 500])" onload="setObj(document.getElementsByClassName('object')); setTXT(document.getElementById('txt'));">
+<body onkeypress="controls(document.getElementById('player'), event, [0, 500])" onload="setObj(document.getElementsByClassName('object')); setTXT(document.getElementById('txt')); randomMove([0, 500]);">
     <div id="player">@</div>
     <div id="txt">if you are reading this something is terribly wrong :)</div>
     
@@ -58,6 +58,7 @@
     <div class="object">HHHHH#190#310</div>
     <div class="object">LJ#190#350</div>
 
+    <div class="object path">0#120#100</div>
     <div class="object path">0#120#110</div>
     <div class="object path">0#120#120</div>
     <div class="object path">0#120#130</div>

@@ -52,8 +52,8 @@ ul {
     z-index: -10;
 }
 .evil {
-    background-color: red;
-    color: blue;
+    background-color: brown;
+    /*color: blue;*/
 }
 .path {
     background-color: transparent;

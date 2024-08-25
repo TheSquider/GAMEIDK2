@@ -13,48 +13,38 @@ let dbgnmbr = 0;
 //
 //PLAYER
 function controls(plr, eve, margins, spd) {
+    //console.time();
     if(!spd){spd = 10;} if(!margins){margins = [0, 500]}
     let key = eve.code;
     
+    function MV(spd, xy) { //Makes for less repitition, slower
+        pos[xy] += spd;
+        for (let i = 0; i < objsPos.length; i++) { //The colision check
+            if (pos.toString() === objsPos[i].toString()) {
+                pos[xy] -= spd;
+            }
+        }
+    }
+
     //key input (yes all of it)
     switch (key) {
         case 'KeyD':
-            pos[0] += spd;
-            for (let i = 0; i < objsPos.length; i++) {
-                if (pos.toString() === objsPos[i].toString()) {
-                    pos[0] -= spd;
-                }
-            }
-            plr.style.left = pos[0].toString() + 'px';
+            MV(spd, 0);
+            applypos(pos, plr);
             break;
         case 'KeyA':
-            pos[0] -= spd;
-            for (let i = 0; i < objsPos.length; i++) {
-                if (pos.toString() === objsPos[i].toString()) {
-                    pos[0] += spd;
-                }
-            }
-            plr.style.left = pos[0].toString() + 'px';
+            MV(spd*-1, 0);
+            applypos(pos, plr);
             break;
         case 'KeyS':
-            pos[1] += spd;
-            for (let i = 0; i < objsPos.length; i++) {
-                if (pos.toString() === objsPos[i].toString()) {
-                    pos[1] -= spd;
-                }
-            }
-            plr.style.top = pos[1].toString() + 'px';
-            plr.style.zIndex = '0'; //FIX THIS
+            MV(spd, 1);
+            applypos(pos, plr);
+            //plr.style.zIndex = '0'; //FIX THIS
             break;
         case 'KeyW':
-            pos[1] -= spd;
-            for (let i = 0; i < objsPos.length; i++) {
-                if (pos.toString() === objsPos[i].toString()) {
-                    pos[1] += spd;
-                }
-            }
-            plr.style.top = pos[1].toString() + 'px';
-            plr.style.zIndex = '2'; //FIX THIS
+            MV(spd*-1, 1);
+            applypos(pos, plr);
+            //plr.style.zIndex = '2'; //FIX THIS
             break;
     
     //OTHER CONTROLS
@@ -113,6 +103,7 @@ function controls(plr, eve, margins, spd) {
     }
 
     //console.log('position[x,y]: ' + pos);
+    //console.timeEnd();
 }
 function applypos(newPos, obj) {
     obj.style.left = newPos[0].toString() + 'px';
@@ -127,13 +118,13 @@ function setObj(obj) {
     let A = performance.now(); //ignore this DEBUG
     let pthcnt = 0;
 
-    npcElement.push('ERROR'); //This is so the var InteralID can be used in npc.js and be 1-1 with the other NPC arrays
+    //npcElement.push('ERROR'); //This is so the var InteralID can be used in npc.js and be 1-1 with the other NPC arrays
 
     for (let i = 0; i < obj.length; i++) {
         const cObj = obj[i];
         let Opos = cObj.innerHTML.split('#'); //In order [X cordinate, Y cordinate, NPC ID (if any)]
         
-        if (Opos[0].length > 1 && cObj.className !== 'object path') { //This is needed for objects with horizontal lenght (eg. walls)
+        if (Opos[0].length > 1 && cObj.className == 'object') { //This is needed for objects with horizontal lenght (eg. walls)
             for (let i = 1; i < Opos[0].length; i++) {
                 let intOposWall = [parseInt(Opos[1])+10*i, parseInt(Opos[2])];
                 objsPos.push(intOposWall);
@@ -165,10 +156,11 @@ function setObj(obj) {
     }
 
     //SET NPC MOVE
-
+    
+    //DEBUG
     let B = performance.now();
     dbgnmbr = (B - A);
-    console.log(dbgnmbr + ' @ ' + (objsPos.length+npcPos.length+pthcnt) + ' OBJECTS');
+    console.log(dbgnmbr + ' ms @ ' + (objsPos.length+npcPos.length+pthcnt) + ' OBJECTS');
 }
 
 
