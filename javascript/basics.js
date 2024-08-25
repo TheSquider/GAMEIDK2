@@ -2,8 +2,10 @@ let pos = [0, 0]
 let objsPos = []
 let npcPos = [] 
 let npcID = [] //1-1 with npcPos
+let npcElement = [] //NOT 1-1 WITH NPCPOS (for the dialog options to work), it is +1 of the index (if npcPos[0] then npcElement[1])
 let dialogStage = 1; //dialogStage = 0 is the id of the NPC
 let InternalId = 0; //NPC ID used for dialog, it's its index in the array. I made it so npcID and InternalID are not the same for flexebility, less errors!
+let dialogOption = 0;
 //DEBUG
 let dbgnmbr = 0;
 
@@ -13,7 +15,7 @@ let dbgnmbr = 0;
 function controls(plr, eve, margins, spd) {
     if(!spd){spd = 10;} if(!margins){margins = [0, 500]}
     let key = eve.code;
-
+    
     //key input (yes all of it)
     switch (key) {
         case 'KeyD':
@@ -64,15 +66,33 @@ function controls(plr, eve, margins, spd) {
                 }
             }
             break;
+    //MENU
         case 'KeyP': //open menu (items, quests, stats) & close txtbox if open | ONLY SECOND WORKS
             if (appBool == true) {
                 glbtxt.remove();
                 appBool = false; //Varible from dialog.js
+                menuBool = false;
 
                 dialogStage = 1;
                 InternalId = 0; //Variable from npc.js
             } else {
-                //MENU
+                menuBool = true;
+                menu();
+            }
+            break;
+        case 'BracketLeft':
+            if (menuBool == true) {
+                selectMenu(-1);
+            }
+            break;
+        case 'BracketRight':
+            if (menuBool == true) {
+                selectMenu(1);
+            }
+            break;
+        case 'KeyO':
+            if (menuBool == true) {
+                clickMenu(dialogOption);
             }
             break;
         //ADD MENU INTERACTIONS
@@ -104,12 +124,16 @@ function applypos(newPos, obj) {
 //
 //OBJECTS
 function setObj(obj) {
-    let A = performance.now(); //ignore this
+    let A = performance.now(); //ignore this DEBUG
+    let pthcnt = 0;
+
+    npcElement.push('ERROR'); //This is so the var InteralID can be used in npc.js and be 1-1 with the other NPC arrays
+
     for (let i = 0; i < obj.length; i++) {
         const cObj = obj[i];
         let Opos = cObj.innerHTML.split('#'); //In order [X cordinate, Y cordinate, NPC ID (if any)]
         
-        if (Opos[0].length > 1) { //This is needed for objects with horizontal lenght (eg. walls)
+        if (Opos[0].length > 1 && cObj.className !== 'object path') { //This is needed for objects with horizontal lenght (eg. walls)
             for (let i = 1; i < Opos[0].length; i++) {
                 let intOposWall = [parseInt(Opos[1])+10*i, parseInt(Opos[2])];
                 objsPos.push(intOposWall);
@@ -124,19 +148,27 @@ function setObj(obj) {
            intOpos.push(parseInt(Opos[i]));
         }
         
-        if (cObj.innerHTML == '§') { //Adds to the npc list or object list (Yes NPCs must use the § symbol)
+        //ARRAYS
+        if (cObj.className == 'object npc' || cObj.className == 'object npc evil') { //Adds to the npc list or object list, does nothing for paths (Yes, the class must be 'object npc' in that order)
+            //no more than the NPC class, might need work
+            npcElement.push(cObj);
             npcPos.push(intOpos);
         }
+        else if(cObj.className == 'object path') {/*does nothing*/ pthcnt++}
         else {objsPos.push(intOpos);}
         
         applypos(intOpos, cObj); //The whole reason we did all that is so objects can be on a grid, otherwise it would be near imposible to do anything
     }
+
     for (let i = 0; i < npcPos.length; i++) { //IT IS NEEDED EXACTLY LIKE THAT FOR DIALOG, DO NOT MESS WITH THIS
         npcID[i] = npcPos[i].pop();
     }
+
+    //SET NPC MOVE
+
     let B = performance.now();
     dbgnmbr = (B - A);
-    console.log(dbgnmbr + ' @ OBJECTS');
+    console.log(dbgnmbr + ' @ ' + (objsPos.length+npcPos.length+pthcnt) + ' OBJECTS');
 }
 
 

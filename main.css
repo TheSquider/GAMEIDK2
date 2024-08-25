@@ -2,6 +2,7 @@ body {
     font-family: monospace;
     font-size: 20px;    
     letter-spacing: -1px;
+    margin: 0px;
 
     background-color: #ffdead;
 }
@@ -13,6 +14,9 @@ div {
     padding-right: 1px;
     width: fit-content;
     height: fit-content;
+}
+ul {
+    list-style: none;
 }
 
 #player {
@@ -37,6 +41,7 @@ div {
     border-width: 3px;
     border-style: dashed;
 }
+
 .object {
     background-color: #4F805F;
     color: #ffdead;
@@ -49,4 +54,9 @@ div {
 .evil {
     background-color: red;
     color: blue;
+}
+.path {
+    background-color: transparent;
+    color: #4F805F;
+    z-index: -90;
 }
