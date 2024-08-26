@@ -60,64 +60,93 @@ function npcDialog(id, ds) {
         document.body.appendChild(glbtxt);
     }
 }
+function setDialog() {
+    let read = "{1#Hello#Nice to fuck you{34#WHAT";
+
+    let readArray = read.split('{');
+    readArray.shift();
+    let readArrayFinal = [];
+
+    for (let i = 0; i < readArray.length; i++) {
+        readArrayFinal.push(readArray[i].split('#'));
+    }
+    for (let i = 0; i < readArrayFinal.length; i++) {
+        readArrayFinal[i][0] = parseInt(readArrayFinal[i][0]);
+        npcDialogOpt.push(readArrayFinal[i])
+    }
+}
 
 
 //
 //
 //MOVEMENT
-function randomMove(npcMargins, id) {
+function randomMove(npcMargins, idGiven) {
     //The air is quite, the birds are out, the clouds are hugging the eart. It's so nice today, I think I'll go for a walk.
 
     let A2 = performance.now(); //ignore this DEBUG
-    if(!id && id !== 0){return null;}
+    if(!idGiven && idGiven !== 0){return null;}
 
     let spd = 10;
     let time = 0;
-
-    function MV(spd, xy) {
-        npcPos[id][xy] += spd;
-            for (let i = 0; i < objsPos.length; i++) {
-                if (npcPos[id].toString() === objsPos[i].toString()) {
-                    npcPos[id][xy] -= spd*2;
-                }
-            }
+    let InteralIDMovement = [];
+    for (let o = 0; o < idGiven.length; o++) {
+        for (let i = 0; i < npcID.length; i++) {
+            if (npcID[i] == idGiven[o]) {InteralIDMovement.push(i)}
+        }
     }
 
-    while (time < 999) {
+    function MV(spd, xy, id) {
+        npcPos[id][xy] += spd;
+        for (let i = 0; i < objsPos.length; i++) {
+            if (npcPos[id].toString() === objsPos[i].toString()) {
+                npcPos[id][xy] -= spd;
+            }
+        }
+    }
+
+    while (time < 9999) {
         let rand = Math.abs((Math.floor(Math.random()*10)-5));
         time += rand;
 
         setTimeout(() => {
-        let rand2 = (Math.floor(Math.random()*10));
-        //The problem is the fact that rand2 and rand can only really be bigger or smaller than 2, meaning that there are only 4 case, which all do diffrent things. If I could get the minus and the plus to merge (*-1?) then there would be only 2
-        if (rand2 > 2) {
-            if (rand < 2) {
-                MV(spd, 0);
-            } else {
-                MV(spd*-1, 0)
-            }
-        } else {
-            if (rand < 2) {
-                MV(spd, 1);
-            } else {
-                MV(spd*-1, 1);
-            }
-        }
+        let rand2 = 2;
+        for (let i = 0; i < InteralIDMovement.length; i++) {
+            const id = InteralIDMovement[i];
+            rand2 = (Math.floor(Math.random()*10));
 
-        for (let i = 0; i < npcPos[id].length; i++) {
-            const check = npcPos[id][i];
-            
-            if(check < npcMargins[0]){
-                npcPos[id][i] += spd;
-            }
-            if (check > npcMargins[1]) {
-                npcPos[id][i] -= spd;
-            }
-        }
-        applypos(npcPos[id], npcElement[id]);}, time * 500);
+            if (npcPos[id].toString() !== pos.toString()) {
+                if (rand2 > 2) {
+                    if (rand < 2) {
+                        MV(spd, 0, id);
+                    } else {
+                        MV(spd*-1, 0, id)
+                    }
+                } else {
+                    if (rand < 2) {
+                        MV(spd, 1, id);
+                    } else {
+                        MV(spd*-1, 1, id);
+                    }
+                }
+        
+                for (let i = 0; i < npcPos[id].length; i++) {
+                    const check = npcPos[id][i];
+                    
+                    if(check < npcMargins[0]){
+                        npcPos[id][i] += spd;
+                    }
+                    if (check > npcMargins[1]) {
+                        npcPos[id][i] -= spd;
+                    }
+                }
+                applypos(npcPos[id], npcElement[id]);
+            }}
+        }, time * 500);
     }
+    //console.log((time * 0.5)/3600 + ' hours');
+    
 
     let B2 = performance.now();
     dbgnmbr2 = (B2 - A2);
-    console.log(dbgnmbr2 + ' ms @ ' + 1 + ' MOVING NPCs');
+    console.log(dbgnmbr2 + ' ms @ ' + idGiven.length + ' MOVING NPCs');
 }

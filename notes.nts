@@ -1,15 +1,18 @@
 #Do basic Menu (done)
-#Do NPC move (done?)
+#Do NPC move (done)
 #FIX NPC MOVE
     -Get rid of repitition (done-no player merger)
-    -Generalise
-    -Stop moving while talking (impossible right now)
-    -Infinite move
+    -Generalise (done)
+    -Stop moving while talking (impossible right now) (did it)
+    -Infinite move (uneeded, 1 hour should be enough (the ms hit is big though))
+    !-Sometimes NPCs clip through walls and idk why (not an issue, rare)
+#Do paths (done-for now)
+#Do NPC dialog choice (THEY CAN FUCKING RUN CODE LESSS GOOOO) (Half-way there)
+#Do NPC dialog seporate from npc.js (How am I going to get a filesystem working without Node.js?)
+#FIX CLASSES (Will do later)
 #Do items
 #Do quests
-#Do paths (done-for now)
-#Do NPC dialog choice (THE CAN FUCKING RUN CODE LESSS GOOOO)
-#Do NPC dilog seporate from npc.js
-#FIX CLASSES
 
 Rooted class names (basic.js, ln: 131 & 147-152)
+The problem of apperance
+The menu question

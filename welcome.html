@@ -7,7 +7,7 @@
     <script src="./javascript/npc.js"></script>
     <script src="./javascript/basics.js"></script>
     <script src="./javascript/dialog.js"></script>
-    <title>WELLCOME</title>
+    <title>WELCOME</title>
     <style>
         body {
             background-color: white;
@@ -19,7 +19,7 @@
         }
     </style>
 </head>
-<body onkeypress="controls(document.getElementById('player'), event, [0, 100])" onload="setObj(document.getElementsByClassName('object')); setTXT(document.getElementById('txt')); randomMove([10, 50], 0);">
+<body onkeypress="controls(document.getElementById('player'), event, [0, 100])" onload="setObj(document.getElementsByClassName('object')); setTXT(document.getElementById('txt')); randomMove([10, 50], [99]);">
     <div id="player">@</div>
     <div id="txt">if you are reading this something is terribly wrong :)</div>
 
