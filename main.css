@@ -18,6 +18,10 @@ div {
 ul {
     list-style: none;
 }
+li {
+    margin: 0;
+    margin-left: 10px;
+}
 
 #player {
     background-color: #ADFFC8;

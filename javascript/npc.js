@@ -13,7 +13,7 @@ let npcDialogOpt = [
     ],
     [89, 'I', 'AM', 'so happy to see you!', "CMD#document.body.style.background = 'red'CMD#AND ALSO ALIVE MUAHAHAHHA", '...', "CMD#document.body.style.background = '#ffdead'CMD#Ok I'm sorry..."],
     [666, 'lol'],
-    [4, 'Its a tree.'],
+    [4, 'Its a tree.', "CMD#menuBool=true;CMD#Do What?<ul><li id='A'>SAVE</li><li id='B'>HARVEST</li></ul>"],
 
     [99, 'Controls are: WASD to move, Q to interact, P to open the menu, [ and ] to navigate, and O to select.'],
     [100, "Everything you see in changable. You can work within the guidelines I've given you or colour outside the page. Full documentatiion comes with the free download.", "See this more of a jumping board for ideas, not a limitation. I've tried to make this engine simple to work with while still letting people mess with the code itself."],
@@ -60,8 +60,8 @@ function npcDialog(id, ds) {
         document.body.appendChild(glbtxt);
     }
 }
-function setDialog() {
-    let read = "{1#Hello#Nice to fuck you{34#WHAT";
+function setDialog() { 
+    let read = "{10#Hello#Nice to fuck you{34#WHAT";
 
     let readArray = read.split('{');
     readArray.shift();

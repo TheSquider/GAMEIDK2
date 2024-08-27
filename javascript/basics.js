@@ -67,17 +67,17 @@ function controls(plr, eve, margins, spd) {
                 InternalId = 0; //Variable from npc.js
             } else {
                 menuBool = true;
-                menu();
+                menu(menuOptionsDefault, menuTextDefault);
             }
             break;
         case 'BracketLeft':
             if (menuBool == true) {
-                selectMenu(-1);
+                selectMenu(-1, menuOptionsDefault);
             }
             break;
         case 'BracketRight':
             if (menuBool == true) {
-                selectMenu(1);
+                selectMenu(1, menuOptionsDefault);
             }
             break;
         case 'KeyO':

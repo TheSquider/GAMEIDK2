@@ -7,12 +7,14 @@
     -Infinite move (uneeded, 1 hour should be enough (the ms hit is big though))
     !-Sometimes NPCs clip through walls and idk why (not an issue, rare)
 #Do paths (done-for now)
-#Do NPC dialog choice (THEY CAN FUCKING RUN CODE LESSS GOOOO) (Half-way there)
+#Do NPC dialog choice (THEY CAN FUCKING RUN CODE LESSS GOOOO) (Can work with menu) (Is tied with menu)
 #Do NPC dialog seporate from npc.js (How am I going to get a filesystem working without Node.js?)
 #FIX CLASSES (Will do later)
+#Generalise Menu (done-but now I HAVE to make a seporate file for menu interactions)
 #Do items
 #Do quests
 
 Rooted class names (basic.js, ln: 131 & 147-152)
 The problem of apperance
-The menu question
+The menu question (solved)
+NPCs get stuck near walls
