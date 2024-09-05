@@ -44,6 +44,7 @@ li {
     border-color: white;
     border-width: 3px;
     border-style: dashed;
+    Text-align: justify;
 }
 
 .object {

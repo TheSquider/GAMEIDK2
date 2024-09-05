@@ -1,6 +1,6 @@
 let dbgnmbr2 = 0; //DEBUG
 let npcDialogOpt = [
-    [0, 'ERROR NO VALID DIALOG, VAR InternalID RETURNED 0 AT npc.js'],
+    /*[0, 'ERROR NO VALID DIALOG, VAR InternalID RETURNED 0 AT npc.js'],
     [1, 'I hate taxes', 'That is why I dont pay them', 'I will die', 'Oh well!'],
     [2, 'I have romantic feelings torwards NPCID#45 and I am going insane because of it!'],
     [45, 
@@ -13,11 +13,11 @@ let npcDialogOpt = [
     ],
     [89, 'I', 'AM', 'so happy to see you!', "CMD#document.body.style.background = 'red'CMD#AND ALSO ALIVE MUAHAHAHHA", '...', "CMD#document.body.style.background = '#ffdead'CMD#Ok I'm sorry..."],
     [666, 'lol'],
-    [4, 'Its a tree.', "CMD#menuBool=true;CMD#Do What?<ul><li id='A'>SAVE</li><li id='B'>HARVEST</li></ul>"],
+    [4, 'Its a tree.', "CMD#menuBool=true;CMD#Do What?<ul><li id='A'>SAVE</li><li id='B'>HARVEST</li></ul>"],*/
 
     [99, 'Controls are: WASD to move, Q to interact, P to open the menu, [ and ] to navigate, and O to select.'],
     [100, "Everything you see in changable. You can work within the guidelines I've given you or colour outside the page. Full documentatiion comes with the free download.", "See this more of a jumping board for ideas, not a limitation. I've tried to make this engine simple to work with while still letting people mess with the code itself."],
-    [101, "Art and software should be free, and above all human. If you end up making anything with this engine please don't monitise it and above all share it.", "I will be hearing feedback and the GitHub link is on the itch.io page.", "Email me at frechsquid.headcanon@gmail.com"],
+    [101, "Art and software should be free, and above all human. If you end up making anything with this engine please don't monitise it and above all share it.", "I will be hearing feedback and the GitHub link is on the itch.io page.", "Email me (and I will respond) at frechsquid.headcanon@gmail.com"],
     [102, "If you press Q again you will go to a test game to see more of the capabilities of the engine, press P to quit.", "CMD#window.location.href = './index.html'CMD#"],
     [103, "Hey you found the obligatory secret in the wellcome page, how neet!"]
 ];
@@ -28,9 +28,9 @@ let npcDialogOpt = [
 //DIALOG
 function npcDialog(id, ds) {
     dbgnmbr2 = dbgnmbr; //Ignore this DEBUG
-    if (dbgnmbr2 > 3) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, go make faster code'}
+    /*if (dbgnmbr2 > 3) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, go make faster code'}
     if (dbgnmbr2 < 3 && dbgnmbr2 > 1) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, it is ok'}
-    if (dbgnmbr2 < 1) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, damn that is fast'}
+    if (dbgnmbr2 < 1) {npcDialogOpt[5][1] = dbgnmbr2 + ' ms, damn that is fast'}*/
 
     let output = 'ERROR';
 
@@ -61,14 +61,14 @@ function npcDialog(id, ds) {
     }
 }
 function setDialog() { 
-    let read = "{10#Hello#Nice to fuck you{34#WHAT";
+    let read = toRead;
 
-    let readArray = read.split('{');
+    let readArray = read.split('gAy~ ');
     readArray.shift();
     let readArrayFinal = [];
 
     for (let i = 0; i < readArray.length; i++) {
-        readArrayFinal.push(readArray[i].split('#'));
+        readArrayFinal.push(readArray[i].split(' # '));
     }
     for (let i = 0; i < readArrayFinal.length; i++) {
         readArrayFinal[i][0] = parseInt(readArrayFinal[i][0]);
